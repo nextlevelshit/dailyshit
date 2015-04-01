@@ -31,3 +31,19 @@ window.addEventListener('load', function(){
 
     });
 });
+
+
+
+var app = angular.module("dailyshit", []);
+
+app.controller("PostsCtrl", ['$scope', '$http', function($scope, $http) {
+    $http.get('/app/controllers/IndexController.php').
+        success(function(data, status, headers, config) {
+            $scope.posts = data;
+        }).
+        error(function(data, status, headers, config) {
+            // log error
+        });
+    }]
+);
+

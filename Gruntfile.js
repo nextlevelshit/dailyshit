@@ -7,6 +7,8 @@ module.exports = function(grunt){
 
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
+    //grunt.loadNpmTasks('grunt-livereload');
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -31,17 +33,26 @@ module.exports = function(grunt){
         watch: {
             html: {
                 files: ['index.html'],
-                tasks: ['htmlhint']
+                //tasks: ['htmlhint'],
+                options: {
+                    livereload: true
+                }
             },
 
             js: {
                 files: ['assets/js/base.js'],
-                tasks: ['uglify']
+                tasks: ['uglify'],
+                options: {
+                    livereload: true
+                }
             },
 
             css: {
                 files: ['assets/sass/**/*.scss'],
-                tasks: ['buildcss']
+                tasks: ['buildcss'],
+                options: {
+                    livereload: true
+                }
             }
         },
 
@@ -79,7 +90,14 @@ module.exports = function(grunt){
                     'build/css/master.css': 'assets/sass/master.scss'
                 }
             }
-        }
+        }//,
+        //
+        //livereload: {
+        //    options: {
+        //        base: 'public'
+        //    },
+        //    files: ['build/**/*', 'app/**/*']
+        //}
     });
 
     grunt.registerTask('default', ['watch']);
